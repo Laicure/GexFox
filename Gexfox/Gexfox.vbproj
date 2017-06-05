@@ -147,7 +147,6 @@
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
     <None Include="Resources\meteor.ico" />
-    <None Include="Resources\folder-outline.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\Geckofx45.45.0.31\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.31\build\Geckofx45.targets')" />
