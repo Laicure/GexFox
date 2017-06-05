@@ -2,6 +2,7 @@
 	Dim GeX As New Gecko.GeckoWebBrowser
 	Dim MobileUA As String = "Mozilla/5.0 (Mobile; rv:45.0.31) Gecko/45.0.31 Firefox/45.0.31"
 	Dim DesktopUA As String = "Mozilla/5.0 (Windows NT 6.3; rv:45.0.31) Gecko/20100101 Firefox/45.0.31"
+	Dim reydi As Boolean = False
 
 	Private Async Sub MainX_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		Me.Text = "GexFox v" & My.Application.Info.Version.ToString
@@ -41,9 +42,16 @@
 		panGex.Controls.Add(GeX)
 
 		GeX.LoadHtml("<html><body bgcolor=""#FFFFFF""><h6>Ready!</h6></body></html>", Nothing)
+
+		reydi = True
 	End Sub
 
 	Private Sub MainX_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+		If Not reydi Then
+			e.Cancel = True
+			Me.Activate()
+		End If
+
 		Me.Hide()
 
 		GeX.Dispose()
