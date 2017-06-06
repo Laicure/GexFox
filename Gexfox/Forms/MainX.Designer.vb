@@ -78,6 +78,7 @@ Partial Class MainX
 		Me.txUrl.Size = New System.Drawing.Size(164, 22)
 		Me.txUrl.TabIndex = 0
 		Me.txUrl.TabStop = False
+		Me.tipper.SetToolTip(Me.txUrl, "(Select All Text and Focus: ctrl+`)")
 		'
 		'pbLoad
 		'
@@ -106,7 +107,7 @@ Partial Class MainX
 		Me.lbUA.TabIndex = 5
 		Me.lbUA.Text = "M"
 		Me.lbUA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbUA, "M = Mobile" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "D = Desktop")
+		Me.tipper.SetToolTip(Me.lbUA, "M = Mobile" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "D = Desktop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Toggle: ctrl+1)")
 		'
 		'butMin
 		'
@@ -134,7 +135,7 @@ Partial Class MainX
 		Me.lbBack.TabIndex = 4
 		Me.lbBack.Text = "B"
 		Me.lbBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbBack, "Back")
+		Me.tipper.SetToolTip(Me.lbBack, "Back" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+2)")
 		'
 		'lbReload
 		'
@@ -149,7 +150,7 @@ Partial Class MainX
 		Me.lbReload.TabIndex = 3
 		Me.lbReload.Text = "R"
 		Me.lbReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbReload, "Reload")
+		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
 		'
 		'lbForward
 		'
@@ -164,7 +165,7 @@ Partial Class MainX
 		Me.lbForward.TabIndex = 2
 		Me.lbForward.Text = "F"
 		Me.lbForward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbForward, "Forward")
+		Me.tipper.SetToolTip(Me.lbForward, "Forward" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+4)")
 		'
 		'tbOpac
 		'
@@ -179,7 +180,7 @@ Partial Class MainX
 		Me.tbOpac.TabStop = False
 		Me.tbOpac.TickFrequency = 2
 		Me.tbOpac.TickStyle = System.Windows.Forms.TickStyle.None
-		Me.tipper.SetToolTip(Me.tbOpac, "Opacity: 100%")
+		Me.tipper.SetToolTip(Me.tbOpac, "Opacity: 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(-1: ctrl+5)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(+1: ctrl+6)")
 		Me.tbOpac.Value = 100
 		'
 		'tipper
@@ -190,7 +191,7 @@ Partial Class MainX
 		Me.tipper.InitialDelay = 143
 		Me.tipper.ReshowDelay = 100
 		Me.tipper.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-		Me.tipper.ToolTipTitle = "Gex"
+		Me.tipper.ToolTipTitle = "GexFox"
 		Me.tipper.UseAnimation = False
 		Me.tipper.UseFading = False
 		'

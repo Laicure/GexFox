@@ -40,6 +40,7 @@
 		'GeX Settings
 		With GeX
 			.Dock = DockStyle.Fill
+			.TabStop = True
 		End With
 		'Add to Panel
 		panGex.Controls.Add(GeX)
@@ -110,10 +111,29 @@
 		GeX.Focus()
 	End Sub
 
-	'Quick Hide?
+	'Keydown Events or something
 	Private Sub Gex_KeyDown(sender As Object, e As Gecko.DomKeyEventArgs)
 		If e.KeyCode = Keys.Escape Then
 			butMin_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = 192 Then
+			txUrl.SelectAll()
+			txUrl.Focus()
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D1 Then
+			lbUA_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D2 Then
+			lbBack_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D3 Then
+			lbReload_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D4 Then
+			lbForward_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D5 Then
+			If tbOpac.Value > 7 Then
+				tbOpac.Value -= 1
+			End If
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D6 Then
+			If tbOpac.Value < 100 Then
+				tbOpac.Value += 1
+			End If
 		End If
 	End Sub
 
@@ -121,9 +141,9 @@
 
 #Region "Controls"
 
-	Private Sub tbOpac_Scroll(sender As Object, e As EventArgs) Handles tbOpac.Scroll
+	Private Sub tbOpac_ValueChanged(sender As Object, e As EventArgs) Handles tbOpac.ValueChanged
 		Me.Opacity = tbOpac.Value / 100
-		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%")
+		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%" & vbCrLf & "(-1: ctrl+5)" & vbCrLf & "(+1: ctrl+6)")
 
 		If panGex.Visible Then
 			GeX.Focus()
