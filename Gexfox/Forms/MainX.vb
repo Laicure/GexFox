@@ -1,7 +1,7 @@
 ﻿Public Class MainX
 	Dim GeX As New Gecko.GeckoWebBrowser
-	Dim MobileUA As String = "Mozilla/5.0 (Mobile; rv:45.0.31) Gecko/45.0.31 Firefox/45.0.31"
-	Dim DesktopUA As String = "Mozilla/5.0 (Windows NT 6.3; rv:45.0.31) Gecko/20100101 Firefox/45.0.31"
+	Dim MobileUA As String = "Mozilla/5.0 (Mobile; rv:45.0) Gecko/45.0 Firefox/45.0"
+	Dim DesktopUA As String = "Mozilla/5.0 (Windows NT 6.3; rv:45.0) Gecko/20100101 Firefox/45.0"
 	Dim reydi As Boolean = False
 
 	Private Async Sub MainX_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -9,6 +9,7 @@
 		Me.Icon = My.Resources.meteor 'materialdesignicons.com
 		notIGexed.Icon = My.Resources.meteor 'materialdesignicons.com
 		notIGexed.Text = "GexFox v" & My.Application.Info.Version.ToString
+		pbLoad.Image = My.Resources._126
 
 		Await Task.Delay(1225)
 
@@ -17,21 +18,23 @@
 
 		'Event Mapping
 		AddHandler GeX.CreateWindow, AddressOf Gex_CreateWindow
-		AddHandler GeX.NavigationError, AddressOf Gex_NavigationError
 		AddHandler GeX.Navigating, AddressOf Gex_Navigating
 		AddHandler GeX.Navigated, AddressOf Gex_Navigated
 		AddHandler GeX.DomKeyDown, AddressOf Gex_KeyDown
+		AddHandler GeX.CanGoBackChanged, AddressOf Gex_CanGoBackChanged
+		AddHandler GeX.CanGoForwardChanged, AddressOf Gex_CanGoForwardChanged
 
 		'set Geck inits
 		Gecko.GeckoPreferences.User("general.useragent.override") = MobileUA
 		Gecko.GeckoPreferences.User("zoom.maxPercent") = 100
-		Gecko.GeckoPreferences.User("zoom.minPercent") = 100
+		Gecko.GeckoPreferences.User("zoom.minPercent") = 20
 		Gecko.GeckoPreferences.User("layout.spellcheckDefault") = 2
 		Gecko.GeckoPreferences.User("ui.SpellCheckerUnderlineStyle") = 4
 		Gecko.GeckoPreferences.User("network.http.pipelining") = True
 		Gecko.GeckoPreferences.User("network.prefetch-next") = False
 		Gecko.GeckoPreferences.User("dom.max_script_run_time") = 17
-		Gecko.GeckoPreferences.User("browser.backspace_action") = 1
+		Gecko.GeckoPreferences.User("browser.xul.error_pages.enabled") = False
+		Gecko.GeckoPreferences.User("places.history.enabled") = False
 		Gecko.GeckoPreferences.User("general.warnOnAboutConfig") = False
 
 		'GeX Settings
@@ -50,6 +53,7 @@
 		If Not reydi Then
 			e.Cancel = True
 			Me.Activate()
+			Exit Sub
 		End If
 
 		Me.Hide()
@@ -69,27 +73,42 @@
 	End Sub
 
 #Region "Gex Events"
+	Private Sub Gex_CanGoBackChanged(sender As Object, e As System.EventArgs)
+		lbBack.Enabled = GeX.CanGoBack
+	End Sub
+
+	Private Sub Gex_CanGoForwardChanged(sender As Object, e As System.EventArgs)
+		lbForward.Enabled = GeX.CanGoForward
+	End Sub
 
 	Private Sub Gex_Navigated(sender As Object, e As Gecko.GeckoNavigatedEventArgs)
-		lbLoad.Visible = False
+		Dim hashHistory As New HashSet(Of String)
+		For Each entry As Gecko.GeckoHistoryEntry In GeX.History
+			hashHistory.Add(entry.Url.ToString)
+		Next
+		Dim coll As New AutoCompleteStringCollection
+		coll.AddRange(hashHistory.ToArray)
+		txUrl.AutoCompleteCustomSource = coll
+
+		txUrl.Text = GeX.Url.ToString
+		pbLoad.Visible = False
+		lbReload.Enabled = True
 	End Sub
 
-	Private Sub Gex_Navigating(sender As Object, e As Gecko.Events.GeckoNavigatingEventArgs)
-		lbLoad.Visible = True
+	Private Sub Gex_Navigating(sender As Object, e As Gecko.Events.GeckoNavigatingEventArgs)		
+		pbLoad.Visible = True
+		lbReload.Enabled = False
 	End Sub
 
-	Private Sub Gex_NavigationError(sender As Object, e As Gecko.Events.GeckoNavigationErrorEventArgs)
-		'GeX.LoadHtml("<html><body bgcolor=""#FFFFFF""><h6>Error: " & e.ErrorCode.ToString & "</h6></body></html>", Nothing)
-	End Sub
-
-	'prevent new window/tab
+	'prevent new window/tab; user prefs for new window not working
 	Private Sub Gex_CreateWindow(sender As Object, e As Gecko.GeckoCreateWindowEventArgs)
 		e.Cancel = True
+		GeX.Stop()
 		GeX.Navigate(e.Uri)
 		GeX.Focus()
 	End Sub
 
-	'Quick Hide
+	'Quick Hide?
 	Private Sub Gex_KeyDown(sender As Object, e As Gecko.DomKeyEventArgs)
 		If e.KeyCode = Keys.Escape Then
 			butMin_Click(sender, Nothing)
@@ -99,7 +118,6 @@
 #End Region
 
 #Region "Controls"
-
 	Private Sub tbOpac_Scroll(sender As Object, e As EventArgs) Handles tbOpac.Scroll
 		Me.Opacity = tbOpac.Value / 100
 		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%")
@@ -110,15 +128,16 @@
 	End Sub
 
 	Private Sub txUrl_KeyDown(sender As Object, e As KeyEventArgs) Handles txUrl.KeyDown
-		If e.KeyCode = Keys.Enter And Not lbLoad.Visible Then
+		If e.KeyCode = Keys.Enter Then
 			Dim newAdd As String = txUrl.Text
 			If Not String.IsNullOrWhiteSpace(newAdd) Then
-				If newAdd.Trim = "about:config" Then
+				GeX.Stop()
+				If newAdd.Trim.StartsWith("about:") Then
 					GeX.Navigate(newAdd)
 				Else
 					Dim urx As Uri = Nothing
 					Try
-						urx = New Uri("http://" & newAdd.Trim)
+						urx = New Uri(IIf(Not newAdd.Contains("://"), "http://", "").ToString & newAdd.Trim)
 					Catch ex As Exception
 						urx = Nothing
 					End Try
@@ -134,25 +153,19 @@
 	End Sub
 
 	Private Sub lbReload_Click(sender As Object, e As EventArgs) Handles lbReload.Click
-		If lbLoad.Visible Then
-			Exit Sub
-		End If
+		GeX.Stop()
 		GeX.Reload()
 		GeX.Focus()
 	End Sub
 
 	Private Sub lbBack_Click(sender As Object, e As EventArgs) Handles lbBack.Click
-		If lbLoad.Visible Then
-			Exit Sub
-		End If
+		GeX.Stop()
 		GeX.GoBack()
 		GeX.Focus()
 	End Sub
 
 	Private Sub lbForward_Click(sender As Object, e As EventArgs) Handles lbForward.Click
-		If lbLoad.Visible Then
-			Exit Sub
-		End If
+		GeX.Stop()
 		GeX.GoForward()
 		GeX.Focus()
 	End Sub
@@ -172,7 +185,7 @@
 	End Sub
 
 	Private Sub lbUA_Click(sender As Object, e As EventArgs) Handles lbUA.Click
-		If lbLoad.Visible Then
+		If Not reydi Then
 			Exit Sub
 		End If
 
@@ -188,12 +201,5 @@
 	End Sub
 
 #End Region
-
-	Private Sub lbLoad_VisibleChanged(sender As Object, e As EventArgs) Handles lbLoad.VisibleChanged
-		panGex.Visible = Not lbLoad.Visible
-		If panGex.Visible Then
-			GeX.Focus()
-		End If
-	End Sub
 
 End Class
