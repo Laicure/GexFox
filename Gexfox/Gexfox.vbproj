@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Gexfox.My.MyApplication</StartupObject>
     <RootNamespace>Gexfox</RootNamespace>
-    <AssemblyName>Gexfox</AssemblyName>
+    <AssemblyName>Notepad+</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -22,7 +22,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Gexfox.xml</DocumentationFile>
+    <DocumentationFile>Notepad+.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -33,7 +33,7 @@
     <DefineTrace>false</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Gexfox.xml</DocumentationFile>
+    <DocumentationFile>Notepad+.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
   </PropertyGroup>
