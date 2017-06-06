@@ -73,6 +73,7 @@
 	End Sub
 
 #Region "Gex Events"
+
 	Private Sub Gex_CanGoBackChanged(sender As Object, e As System.EventArgs)
 		lbBack.Enabled = GeX.CanGoBack
 	End Sub
@@ -93,9 +94,10 @@
 		txUrl.Text = GeX.Url.ToString
 		pbLoad.Visible = False
 		lbReload.Enabled = True
+		GeX.Focus()
 	End Sub
 
-	Private Sub Gex_Navigating(sender As Object, e As Gecko.Events.GeckoNavigatingEventArgs)		
+	Private Sub Gex_Navigating(sender As Object, e As Gecko.Events.GeckoNavigatingEventArgs)
 		pbLoad.Visible = True
 		lbReload.Enabled = False
 	End Sub
@@ -118,6 +120,7 @@
 #End Region
 
 #Region "Controls"
+
 	Private Sub tbOpac_Scroll(sender As Object, e As EventArgs) Handles tbOpac.Scroll
 		Me.Opacity = tbOpac.Value / 100
 		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%")
