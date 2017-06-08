@@ -30,11 +30,12 @@ Partial Class MainX
 		Me.lbUA = New System.Windows.Forms.Label()
 		Me.butMin = New System.Windows.Forms.Button()
 		Me.lbBack = New System.Windows.Forms.Label()
-		Me.lbReload = New System.Windows.Forms.Label()
 		Me.lbForward = New System.Windows.Forms.Label()
+		Me.lbReload = New System.Windows.Forms.Label()
 		Me.tbOpac = New System.Windows.Forms.TrackBar()
 		Me.tipper = New System.Windows.Forms.ToolTip(Me.components)
 		Me.notIGexed = New System.Windows.Forms.NotifyIcon(Me.components)
+		Me.lbHome = New System.Windows.Forms.Label()
 		Me.panConts.SuspendLayout()
 		CType(Me.pbLoad, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.tbOpac, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,12 +52,13 @@ Partial Class MainX
 		'panConts
 		'
 		Me.panConts.Controls.Add(Me.txUrl)
+		Me.panConts.Controls.Add(Me.lbHome)
 		Me.panConts.Controls.Add(Me.pbLoad)
 		Me.panConts.Controls.Add(Me.lbUA)
 		Me.panConts.Controls.Add(Me.butMin)
 		Me.panConts.Controls.Add(Me.lbBack)
-		Me.panConts.Controls.Add(Me.lbReload)
 		Me.panConts.Controls.Add(Me.lbForward)
+		Me.panConts.Controls.Add(Me.lbReload)
 		Me.panConts.Controls.Add(Me.tbOpac)
 		Me.panConts.Dock = System.Windows.Forms.DockStyle.Top
 		Me.panConts.Location = New System.Drawing.Point(0, 0)
@@ -66,8 +68,6 @@ Partial Class MainX
 		'
 		'txUrl
 		'
-		Me.txUrl.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-		Me.txUrl.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
 		Me.txUrl.BackColor = System.Drawing.Color.White
 		Me.txUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.txUrl.Dock = System.Windows.Forms.DockStyle.Fill
@@ -75,7 +75,7 @@ Partial Class MainX
 		Me.txUrl.Location = New System.Drawing.Point(22, 0)
 		Me.txUrl.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
 		Me.txUrl.Name = "txUrl"
-		Me.txUrl.Size = New System.Drawing.Size(164, 22)
+		Me.txUrl.Size = New System.Drawing.Size(142, 22)
 		Me.txUrl.TabIndex = 0
 		Me.txUrl.TabStop = False
 		Me.tipper.SetToolTip(Me.txUrl, "(Select All Text and Focus: ctrl+`)")
@@ -137,21 +137,6 @@ Partial Class MainX
 		Me.lbBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		Me.tipper.SetToolTip(Me.lbBack, "Back" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+2)")
 		'
-		'lbReload
-		'
-		Me.lbReload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.lbReload.Dock = System.Windows.Forms.DockStyle.Right
-		Me.lbReload.Enabled = False
-		Me.lbReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbReload.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.lbReload.Location = New System.Drawing.Point(230, 0)
-		Me.lbReload.Name = "lbReload"
-		Me.lbReload.Size = New System.Drawing.Size(22, 22)
-		Me.lbReload.TabIndex = 3
-		Me.lbReload.Text = "R"
-		Me.lbReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
-		'
 		'lbForward
 		'
 		Me.lbForward.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -159,13 +144,28 @@ Partial Class MainX
 		Me.lbForward.Enabled = False
 		Me.lbForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.lbForward.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.lbForward.Location = New System.Drawing.Point(252, 0)
+		Me.lbForward.Location = New System.Drawing.Point(230, 0)
 		Me.lbForward.Name = "lbForward"
 		Me.lbForward.Size = New System.Drawing.Size(22, 22)
 		Me.lbForward.TabIndex = 2
 		Me.lbForward.Text = "F"
 		Me.lbForward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		Me.tipper.SetToolTip(Me.lbForward, "Forward" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+4)")
+		'
+		'lbReload
+		'
+		Me.lbReload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.lbReload.Dock = System.Windows.Forms.DockStyle.Right
+		Me.lbReload.Enabled = False
+		Me.lbReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.lbReload.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbReload.Location = New System.Drawing.Point(252, 0)
+		Me.lbReload.Name = "lbReload"
+		Me.lbReload.Size = New System.Drawing.Size(22, 22)
+		Me.lbReload.TabIndex = 3
+		Me.lbReload.Text = "R"
+		Me.lbReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
 		'
 		'tbOpac
 		'
@@ -180,7 +180,7 @@ Partial Class MainX
 		Me.tbOpac.TabStop = False
 		Me.tbOpac.TickFrequency = 2
 		Me.tbOpac.TickStyle = System.Windows.Forms.TickStyle.None
-		Me.tipper.SetToolTip(Me.tbOpac, "Opacity: 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(-1: ctrl+5)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(+1: ctrl+6)")
+		Me.tipper.SetToolTip(Me.tbOpac, "Opacity: 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(-1%: ctrl+5)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(+1%: ctrl+6)")
 		Me.tbOpac.Value = 100
 		'
 		'tipper
@@ -200,6 +200,21 @@ Partial Class MainX
 		Me.notIGexed.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
 		Me.notIGexed.BalloonTipText = "Stealth mode!"
 		Me.notIGexed.BalloonTipTitle = "Gex"
+		'
+		'lbHome
+		'
+		Me.lbHome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.lbHome.Dock = System.Windows.Forms.DockStyle.Right
+		Me.lbHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.lbHome.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbHome.Location = New System.Drawing.Point(164, 0)
+		Me.lbHome.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
+		Me.lbHome.Name = "lbHome"
+		Me.lbHome.Size = New System.Drawing.Size(22, 22)
+		Me.lbHome.TabIndex = 6
+		Me.lbHome.Text = "H"
+		Me.lbHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.tipper.SetToolTip(Me.lbHome, "Home; resets opacity to 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+<tab key>)")
 		'
 		'MainX
 		'
@@ -236,4 +251,5 @@ Partial Class MainX
 	Friend WithEvents tipper As System.Windows.Forms.ToolTip
 	Friend WithEvents notIGexed As System.Windows.Forms.NotifyIcon
 	Friend WithEvents pbLoad As System.Windows.Forms.PictureBox
+	Friend WithEvents lbHome As System.Windows.Forms.Label
 End Class
