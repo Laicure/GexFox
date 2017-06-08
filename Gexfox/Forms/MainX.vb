@@ -17,14 +17,6 @@
 		'init Xpcom
 		Gecko.Xpcom.Initialize("Firefox")
 
-		'Event Mapping
-		AddHandler GeX.CreateWindow, AddressOf Gex_CreateWindow
-		AddHandler GeX.Navigating, AddressOf Gex_Navigating
-		AddHandler GeX.Navigated, AddressOf Gex_Navigated
-		AddHandler GeX.DomKeyDown, AddressOf Gex_KeyDown
-		AddHandler GeX.CanGoBackChanged, AddressOf Gex_CanGoBackChanged
-		AddHandler GeX.CanGoForwardChanged, AddressOf Gex_CanGoForwardChanged
-
 		'set Geck inits
 		Gecko.GeckoPreferences.User("general.useragent.override") = MobileUA
 		Gecko.GeckoPreferences.User("zoom.maxPercent") = 100
@@ -37,16 +29,27 @@
 		Gecko.GeckoPreferences.User("browser.xul.error_pages.enabled") = False
 		Gecko.GeckoPreferences.User("places.history.enabled") = False
 		Gecko.GeckoPreferences.User("general.warnOnAboutConfig") = False
+		Gecko.GeckoPreferences.User("privacy.trackingprotection.enabled") = False
 
 		'GeX Settings
 		With GeX
+			'Event Mapping
+			AddHandler .CreateWindow, AddressOf Gex_CreateWindow
+			AddHandler .Navigating, AddressOf Gex_Navigating
+			AddHandler .Navigated, AddressOf Gex_Navigated
+			AddHandler .DomKeyDown, AddressOf Gex_KeyDown
+			AddHandler .CanGoBackChanged, AddressOf Gex_CanGoBackChanged
+			AddHandler .CanGoForwardChanged, AddressOf Gex_CanGoForwardChanged
+
+			'Properties
 			.Dock = DockStyle.Fill
 			.TabStop = True
+			.BackColor = Color.White
 		End With
 		'Add to Panel
 		panGex.Controls.Add(GeX)
 
-		GeX.LoadHtml("<html><body bgcolor=""#FFFFFF""><h6>Ready!</h6></body></html>", Nothing)
+		GeX.LoadHtml("<html><body bgcolor=""#FFFFFF""><center><h6><em>Ready!</em></h6></center></body></html>", Nothing)
 
 		reydi = True
 	End Sub
@@ -85,17 +88,11 @@
 	End Sub
 
 	Private Sub Gex_Navigated(sender As Object, e As Gecko.GeckoNavigatedEventArgs)
-		Dim hashHistory As New HashSet(Of String)
-		For Each entry As Gecko.GeckoHistoryEntry In GeX.History
-			hashHistory.Add(entry.Url.ToString)
-		Next
-		Dim coll As New AutoCompleteStringCollection
-		coll.AddRange(hashHistory.ToArray)
-		txUrl.AutoCompleteCustomSource = coll
-
 		txUrl.Text = GeX.Url.ToString
+
 		pbLoad.Visible = False
 		lbReload.Enabled = True
+
 		GeX.Focus()
 	End Sub
 
@@ -119,14 +116,16 @@
 		ElseIf e.CtrlKey AndAlso e.KeyCode = 192 Then
 			txUrl.SelectAll()
 			txUrl.Focus()
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.Tab Then
+			lbHome_Click(sender, Nothing)
 		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D1 Then
 			lbUA_Click(sender, Nothing)
 		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D2 Then
 			lbBack_Click(sender, Nothing)
 		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D3 Then
-			lbReload_Click(sender, Nothing)
-		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D4 Then
 			lbForward_Click(sender, Nothing)
+		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D4 Then
+			lbReload_Click(sender, Nothing)
 		ElseIf e.CtrlKey AndAlso e.KeyCode = Keys.D5 Then
 			If tbOpac.Value > 7 Then
 				tbOpac.Value -= 1
@@ -144,15 +143,12 @@
 
 	Private Sub tbOpac_ValueChanged(sender As Object, e As EventArgs) Handles tbOpac.ValueChanged
 		Me.Opacity = tbOpac.Value / 100
-		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%" & vbCrLf & "(-1: ctrl+5)" & vbCrLf & "(+1: ctrl+6)")
-
-		If panGex.Visible Then
-			GeX.Focus()
-		End If
+		tipper.SetToolTip(tbOpac, "Opacity: " & tbOpac.Value & "%" & vbCrLf & "(-1%: ctrl+5)" & vbCrLf & "(+1%: ctrl+6)")
+		GeX.Focus()
 	End Sub
 
-	Private Sub txUrl_KeyDown(sender As Object, e As KeyEventArgs) Handles txUrl.KeyDown
-		If e.KeyCode = Keys.Enter Then
+	Private Sub txURL_KeyDown(sender As Object, e As KeyEventArgs) Handles txUrl.KeyDown
+		If e.KeyCode = Keys.Enter And reydi Then
 			Dim newAdd As String = txUrl.Text
 			If Not String.IsNullOrWhiteSpace(newAdd) Then
 				GeX.Stop()
@@ -173,7 +169,36 @@
 					End If
 				End If
 			End If
+		ElseIf e.KeyCode = Keys.Escape Then
+			butMin_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = 192 Then
+			txUrl.SelectAll()
+			txUrl.Focus()
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.Tab Then
+			lbHome_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D1 Then
+			lbUA_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D2 Then
+			lbBack_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D3 Then
+			lbForward_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D4 Then
+			lbReload_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D5 Then
+			If tbOpac.Value > 7 Then
+				tbOpac.Value -= 1
+			End If
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D6 Then
+			If tbOpac.Value < 100 Then
+				tbOpac.Value += 1
+			End If
 		End If
+	End Sub
+
+	Private Sub lbHome_Click(sender As Object, e As EventArgs) Handles lbHome.Click
+		GeX.Stop()
+		GeX.Navigate("https://shrib.com/")
+		tbOpac.Value = 100
 	End Sub
 
 	Private Sub lbReload_Click(sender As Object, e As EventArgs) Handles lbReload.Click
@@ -199,7 +224,6 @@
 			Me.Hide()
 			notIGexed.Visible = True
 		End If
-		'Me.WindowState = FormWindowState.Minimized
 	End Sub
 
 	Private Sub notIGexed_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles notIGexed.MouseDoubleClick
@@ -222,6 +246,33 @@
 		End If
 
 		lbReload_Click(sender, Nothing)
+	End Sub
+
+	Private Sub tbOpac_KeyDown(sender As Object, e As KeyEventArgs) Handles tbOpac.KeyDown
+		If e.KeyCode = Keys.Escape Then
+			butMin_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = 192 Then
+			txUrl.SelectAll()
+			txUrl.Focus()
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.Tab Then
+			lbHome_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D1 Then
+			lbUA_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D2 Then
+			lbBack_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D3 Then
+			lbForward_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D4 Then
+			lbReload_Click(sender, Nothing)
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D5 Then
+			If tbOpac.Value > 7 Then
+				tbOpac.Value -= 1
+			End If
+		ElseIf e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.D6 Then
+			If tbOpac.Value < 100 Then
+				tbOpac.Value += 1
+			End If
+		End If
 	End Sub
 
 #End Region
