@@ -237,12 +237,12 @@
 			Exit Sub
 		End If
 
-		If lbUA.Text = "M" Then
+		If lbUA.Text = "📱" Then
 			Gecko.GeckoPreferences.User("general.useragent.override") = DesktopUA
-			lbUA.Text = "D"
+			lbUA.Text = "🖳"
 		Else
 			Gecko.GeckoPreferences.User("general.useragent.override") = MobileUA
-			lbUA.Text = "M"
+			lbUA.Text = "📱"
 		End If
 
 		lbReload_Click(sender, Nothing)

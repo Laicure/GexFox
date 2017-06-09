@@ -26,6 +26,7 @@ Partial Class MainX
 		Me.panGex = New System.Windows.Forms.Panel()
 		Me.panConts = New System.Windows.Forms.Panel()
 		Me.txUrl = New System.Windows.Forms.TextBox()
+		Me.lbHome = New System.Windows.Forms.Label()
 		Me.pbLoad = New System.Windows.Forms.PictureBox()
 		Me.lbUA = New System.Windows.Forms.Label()
 		Me.butMin = New System.Windows.Forms.Button()
@@ -35,7 +36,6 @@ Partial Class MainX
 		Me.tbOpac = New System.Windows.Forms.TrackBar()
 		Me.tipper = New System.Windows.Forms.ToolTip(Me.components)
 		Me.notIGexed = New System.Windows.Forms.NotifyIcon(Me.components)
-		Me.lbHome = New System.Windows.Forms.Label()
 		Me.panConts.SuspendLayout()
 		CType(Me.pbLoad, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.tbOpac, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,6 +80,21 @@ Partial Class MainX
 		Me.txUrl.TabStop = False
 		Me.tipper.SetToolTip(Me.txUrl, "(Select All Text and Focus: ctrl+`)")
 		'
+		'lbHome
+		'
+		Me.lbHome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.lbHome.Dock = System.Windows.Forms.DockStyle.Right
+		Me.lbHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.lbHome.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbHome.Location = New System.Drawing.Point(164, 0)
+		Me.lbHome.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
+		Me.lbHome.Name = "lbHome"
+		Me.lbHome.Size = New System.Drawing.Size(22, 22)
+		Me.lbHome.TabIndex = 6
+		Me.lbHome.Text = "🏠"
+		Me.lbHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.tipper.SetToolTip(Me.lbHome, "Home (shrib.com); resets opacity to 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+<tab>)")
+		'
 		'pbLoad
 		'
 		Me.pbLoad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -99,15 +114,15 @@ Partial Class MainX
 		Me.lbUA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.lbUA.Dock = System.Windows.Forms.DockStyle.Right
 		Me.lbUA.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbUA.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbUA.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lbUA.Location = New System.Drawing.Point(186, 0)
 		Me.lbUA.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
 		Me.lbUA.Name = "lbUA"
 		Me.lbUA.Size = New System.Drawing.Size(22, 22)
 		Me.lbUA.TabIndex = 5
-		Me.lbUA.Text = "M"
+		Me.lbUA.Text = "📱"
 		Me.lbUA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbUA, "M = Mobile" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "D = Desktop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Toggle: ctrl+1)")
+		Me.tipper.SetToolTip(Me.lbUA, "📱 = Mobile" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "🖳 = Desktop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Toggle: ctrl+1)")
 		'
 		'butMin
 		'
@@ -127,13 +142,13 @@ Partial Class MainX
 		Me.lbBack.Dock = System.Windows.Forms.DockStyle.Right
 		Me.lbBack.Enabled = False
 		Me.lbBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbBack.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbBack.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lbBack.Location = New System.Drawing.Point(208, 0)
 		Me.lbBack.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
 		Me.lbBack.Name = "lbBack"
 		Me.lbBack.Size = New System.Drawing.Size(22, 22)
 		Me.lbBack.TabIndex = 4
-		Me.lbBack.Text = "B"
+		Me.lbBack.Text = "◁"
 		Me.lbBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		Me.tipper.SetToolTip(Me.lbBack, "Back" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+2)")
 		'
@@ -143,12 +158,12 @@ Partial Class MainX
 		Me.lbForward.Dock = System.Windows.Forms.DockStyle.Right
 		Me.lbForward.Enabled = False
 		Me.lbForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbForward.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbForward.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lbForward.Location = New System.Drawing.Point(230, 0)
 		Me.lbForward.Name = "lbForward"
 		Me.lbForward.Size = New System.Drawing.Size(22, 22)
 		Me.lbForward.TabIndex = 2
-		Me.lbForward.Text = "F"
+		Me.lbForward.Text = "▷"
 		Me.lbForward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		Me.tipper.SetToolTip(Me.lbForward, "Forward" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+4)")
 		'
@@ -158,12 +173,12 @@ Partial Class MainX
 		Me.lbReload.Dock = System.Windows.Forms.DockStyle.Right
 		Me.lbReload.Enabled = False
 		Me.lbReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbReload.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lbReload.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.lbReload.Location = New System.Drawing.Point(252, 0)
 		Me.lbReload.Name = "lbReload"
 		Me.lbReload.Size = New System.Drawing.Size(22, 22)
 		Me.lbReload.TabIndex = 3
-		Me.lbReload.Text = "R"
+		Me.lbReload.Text = "🔄"
 		Me.lbReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
 		'
@@ -200,21 +215,6 @@ Partial Class MainX
 		Me.notIGexed.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
 		Me.notIGexed.BalloonTipText = "Stealth mode!"
 		Me.notIGexed.BalloonTipTitle = "Gex"
-		'
-		'lbHome
-		'
-		Me.lbHome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.lbHome.Dock = System.Windows.Forms.DockStyle.Right
-		Me.lbHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.lbHome.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.lbHome.Location = New System.Drawing.Point(164, 0)
-		Me.lbHome.Margin = New System.Windows.Forms.Padding(0, 0, 3, 0)
-		Me.lbHome.Name = "lbHome"
-		Me.lbHome.Size = New System.Drawing.Size(22, 22)
-		Me.lbHome.TabIndex = 6
-		Me.lbHome.Text = "H"
-		Me.lbHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbHome, "Home; resets opacity to 100%" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+<tab key>)")
 		'
 		'MainX
 		'
