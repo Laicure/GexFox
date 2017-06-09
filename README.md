@@ -4,7 +4,7 @@
 Current GeckoFX version: [45.0.31](https://bitbucket.org/geckofx/geckofx-45.0)
 
 ##### Shortcuts:
-* esc = instant hide
+* esc = instant hide to notification bar
 * ctrl+tab = home [(notes)](https://shrib.com/)
 * ctrl+` = select and focus url box
 * ctrl+1 = toggle mobile/desktop view
