@@ -24,6 +24,7 @@ Partial Class MainX
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Me.panGex = New System.Windows.Forms.Panel()
+		Me.LbStatusText = New System.Windows.Forms.Label()
 		Me.panConts = New System.Windows.Forms.Panel()
 		Me.txUrl = New System.Windows.Forms.TextBox()
 		Me.lbHome = New System.Windows.Forms.Label()
@@ -36,6 +37,7 @@ Partial Class MainX
 		Me.tbOpac = New System.Windows.Forms.TrackBar()
 		Me.tipper = New System.Windows.Forms.ToolTip(Me.components)
 		Me.notIGexed = New System.Windows.Forms.NotifyIcon(Me.components)
+		Me.panGex.SuspendLayout()
 		Me.panConts.SuspendLayout()
 		CType(Me.pbLoad, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.tbOpac, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -43,11 +45,27 @@ Partial Class MainX
 		'
 		'panGex
 		'
+		Me.panGex.Controls.Add(Me.LbStatusText)
 		Me.panGex.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.panGex.Location = New System.Drawing.Point(0, 22)
 		Me.panGex.Name = "panGex"
 		Me.panGex.Size = New System.Drawing.Size(334, 189)
 		Me.panGex.TabIndex = 0
+		'
+		'LbStatusText
+		'
+		Me.LbStatusText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+			Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.LbStatusText.AutoEllipsis = True
+		Me.LbStatusText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LbStatusText.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.LbStatusText.ForeColor = System.Drawing.Color.Red
+		Me.LbStatusText.Location = New System.Drawing.Point(0, 174)
+		Me.LbStatusText.Name = "LbStatusText"
+		Me.LbStatusText.Size = New System.Drawing.Size(334, 15)
+		Me.LbStatusText.TabIndex = 0
+		Me.LbStatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.LbStatusText.Visible = False
 		'
 		'panConts
 		'
@@ -232,6 +250,7 @@ Partial Class MainX
 		Me.Name = "MainX"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Gexed!"
+		Me.panGex.ResumeLayout(False)
 		Me.panConts.ResumeLayout(False)
 		Me.panConts.PerformLayout()
 		CType(Me.pbLoad, System.ComponentModel.ISupportInitialize).EndInit()
@@ -252,4 +271,5 @@ Partial Class MainX
 	Friend WithEvents notIGexed As System.Windows.Forms.NotifyIcon
 	Friend WithEvents pbLoad As System.Windows.Forms.PictureBox
 	Friend WithEvents lbHome As System.Windows.Forms.Label
+	Friend WithEvents LbStatusText As System.Windows.Forms.Label
 End Class

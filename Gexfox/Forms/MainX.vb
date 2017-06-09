@@ -38,6 +38,7 @@
 			AddHandler .Navigating, AddressOf Gex_Navigating
 			AddHandler .Navigated, AddressOf Gex_Navigated
 			AddHandler .DomKeyDown, AddressOf Gex_KeyDown
+			AddHandler .StatusTextChanged, AddressOf Gex_StatusTextChanged
 			AddHandler .CanGoBackChanged, AddressOf Gex_CanGoBackChanged
 			AddHandler .CanGoForwardChanged, AddressOf Gex_CanGoForwardChanged
 
@@ -50,6 +51,7 @@
 		panGex.Controls.Add(GeX)
 
 		GeX.LoadHtml("<html><body bgcolor=""#FFFFFF""><center><h6><em>Ready!</em></h6></center></body></html>", Nothing)
+		LbStatusText.BringToFront()
 
 		reydi = True
 	End Sub
@@ -78,6 +80,17 @@
 	End Sub
 
 #Region "Gex Events"
+
+	Private Sub Gex_StatusTextChanged(sender As Object, e As System.EventArgs)
+		Dim GexStatext As String = GeX.StatusText
+		If Not String.IsNullOrWhiteSpace(GexStatext) Then
+			LbStatusText.Visible = True
+			LbStatusText.Text = GexStatext.Trim
+		Else
+			LbStatusText.Visible = False
+			LbStatusText.Text = ""
+		End If
+	End Sub
 
 	Private Sub Gex_CanGoBackChanged(sender As Object, e As System.EventArgs)
 		lbBack.Enabled = GeX.CanGoBack
