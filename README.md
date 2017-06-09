@@ -13,3 +13,5 @@ Current GeckoFX version: [45.0.31](https://bitbucket.org/geckofx/geckofx-45.0)
 * ctrl+4 = reload
 * ctrl+5 = decrease opacity
 * ctrl+6 = increase opacity
+
+###### Thanks to [Material Design Icons](https://materialdesignicons.com) for the icons used
