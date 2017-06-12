@@ -49,7 +49,7 @@ Partial Class MainX
 		Me.panGex.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.panGex.Location = New System.Drawing.Point(0, 22)
 		Me.panGex.Name = "panGex"
-		Me.panGex.Size = New System.Drawing.Size(334, 189)
+		Me.panGex.Size = New System.Drawing.Size(334, 239)
 		Me.panGex.TabIndex = 0
 		'
 		'LbStatusText
@@ -60,7 +60,7 @@ Partial Class MainX
 		Me.LbStatusText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LbStatusText.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.LbStatusText.ForeColor = System.Drawing.Color.Red
-		Me.LbStatusText.Location = New System.Drawing.Point(0, 174)
+		Me.LbStatusText.Location = New System.Drawing.Point(0, 224)
 		Me.LbStatusText.Name = "LbStatusText"
 		Me.LbStatusText.Size = New System.Drawing.Size(334, 15)
 		Me.LbStatusText.TabIndex = 0
@@ -183,7 +183,7 @@ Partial Class MainX
 		Me.lbForward.TabIndex = 2
 		Me.lbForward.Text = "▷"
 		Me.lbForward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbForward, "Forward" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+4)")
+		Me.tipper.SetToolTip(Me.lbForward, "Forward" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
 		'
 		'lbReload
 		'
@@ -198,7 +198,7 @@ Partial Class MainX
 		Me.lbReload.TabIndex = 3
 		Me.lbReload.Text = "🔄"
 		Me.lbReload.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+3)")
+		Me.tipper.SetToolTip(Me.lbReload, "Reload" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Key: ctrl+4)")
 		'
 		'tbOpac
 		'
@@ -240,13 +240,13 @@ Partial Class MainX
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.BackColor = System.Drawing.Color.White
 		Me.CancelButton = Me.butMin
-		Me.ClientSize = New System.Drawing.Size(334, 211)
+		Me.ClientSize = New System.Drawing.Size(334, 261)
 		Me.Controls.Add(Me.panGex)
 		Me.Controls.Add(Me.panConts)
 		Me.DoubleBuffered = True
 		Me.Font = New System.Drawing.Font("Segoe UI", 8.25!)
 		Me.ForeColor = System.Drawing.Color.Black
-		Me.MinimumSize = New System.Drawing.Size(350, 250)
+		Me.MinimumSize = New System.Drawing.Size(350, 300)
 		Me.Name = "MainX"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Gexed!"
