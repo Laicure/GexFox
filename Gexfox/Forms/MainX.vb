@@ -169,15 +169,8 @@ Public Class MainX
 				If newAdd.Trim.StartsWith("about:") Then
 					GeX.Navigate(newAdd)
 				Else
-					Dim urx As Uri = Nothing
-					Try
-						urx = New Uri(IIf(Not newAdd.Contains("://"), "http://", "").ToString & newAdd.Trim)
-					Catch ex As Exception
-						urx = Nothing
-					End Try
-
-					If Not IsNothing(urx) Then
-						GeX.Navigate(urx.OriginalString)
+					If Not newAdd.Trim.StartsWith("?") Then
+						GeX.Navigate(newAdd.Trim)
 					Else
 						GeX.Navigate("https://www.google.com/search?q=" & Replace(newAdd, " ", "+") & "&oq=" & Replace(newAdd, " ", "+"))
 					End If
