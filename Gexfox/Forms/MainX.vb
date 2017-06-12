@@ -1,5 +1,7 @@
-﻿Public Class MainX
-	Dim GeX As New Gecko.GeckoWebBrowser
+﻿Imports Gecko
+
+Public Class MainX
+	Dim GeX As New GeckoWebBrowser
 	Dim MobileUA As String = "Mozilla/5.0 (Mobile; rv:45.0) Gecko/45.0 Firefox/45.0"
 	Dim DesktopUA As String = "Mozilla/5.0 (Windows NT 6.3; rv:45.0) Gecko/20100101 Firefox/45.0"
 	Dim reydi As Boolean = False
@@ -14,21 +16,21 @@
 		Await Task.Delay(1225)
 
 		'init Xpcom
-		Gecko.Xpcom.Initialize("Firefox")
+		Xpcom.Initialize("Firefox")
 
 		'set Geck inits
-		Gecko.GeckoPreferences.User("general.useragent.override") = MobileUA
-		Gecko.GeckoPreferences.User("zoom.maxPercent") = 100
-		Gecko.GeckoPreferences.User("zoom.minPercent") = 20
-		Gecko.GeckoPreferences.User("layout.spellcheckDefault") = 2
-		Gecko.GeckoPreferences.User("ui.SpellCheckerUnderlineStyle") = 4
-		Gecko.GeckoPreferences.User("network.http.pipelining") = True
-		Gecko.GeckoPreferences.User("network.prefetch-next") = False
-		Gecko.GeckoPreferences.User("dom.max_script_run_time") = 17
-		Gecko.GeckoPreferences.User("browser.xul.error_pages.enabled") = False
-		Gecko.GeckoPreferences.User("places.history.enabled") = False
-		Gecko.GeckoPreferences.User("general.warnOnAboutConfig") = False
-		Gecko.GeckoPreferences.User("privacy.trackingprotection.enabled") = False
+		GeckoPreferences.User("general.useragent.override") = MobileUA
+		GeckoPreferences.User("zoom.maxPercent") = 100
+		GeckoPreferences.User("zoom.minPercent") = 20
+		GeckoPreferences.User("layout.spellcheckDefault") = 2
+		GeckoPreferences.User("ui.SpellCheckerUnderlineStyle") = 4
+		GeckoPreferences.User("network.http.pipelining") = True
+		GeckoPreferences.User("network.prefetch-next") = False
+		GeckoPreferences.User("dom.max_script_run_time") = 17
+		GeckoPreferences.User("browser.xul.error_pages.enabled") = False
+		GeckoPreferences.User("places.history.enabled") = False
+		GeckoPreferences.User("general.warnOnAboutConfig") = False
+		GeckoPreferences.User("privacy.trackingprotection.enabled") = False
 
 		'GeX Settings
 		With GeX
@@ -65,8 +67,8 @@
 		Me.Hide()
 
 		GeX.Dispose()
-		Gecko.CookieManager.RemoveAll()
-		Gecko.Xpcom.Shutdown()
+		CookieManager.RemoveAll()
+		Xpcom.Shutdown()
 
 		'delete Geckofx folder
 		If My.Computer.FileSystem.DirectoryExists("C:\Users\" & Environment.UserName & "\AppData\Local\Geckofx") Then
@@ -99,7 +101,7 @@
 		lbForward.Enabled = GeX.CanGoForward
 	End Sub
 
-	Private Sub Gex_Navigated(sender As Object, e As Gecko.GeckoNavigatedEventArgs)
+	Private Sub Gex_Navigated(sender As Object, e As GeckoNavigatedEventArgs)
 		txUrl.Text = GeX.Url.ToString
 
 		pbLoad.Visible = False
@@ -108,13 +110,13 @@
 		GeX.Focus()
 	End Sub
 
-	Private Sub Gex_Navigating(sender As Object, e As Gecko.Events.GeckoNavigatingEventArgs)
+	Private Sub Gex_Navigating(sender As Object, e As Events.GeckoNavigatingEventArgs)
 		pbLoad.Visible = True
 		lbReload.Enabled = False
 	End Sub
 
 	'prevent new window/tab; user prefs for new window not working
-	Private Sub Gex_CreateWindow(sender As Object, e As Gecko.GeckoCreateWindowEventArgs)
+	Private Sub Gex_CreateWindow(sender As Object, e As GeckoCreateWindowEventArgs)
 		e.Cancel = True
 		GeX.Stop()
 		GeX.Navigate(e.Uri)
@@ -122,7 +124,7 @@
 	End Sub
 
 	'Keydown Events or something
-	Private Sub Gex_KeyDown(sender As Object, e As Gecko.DomKeyEventArgs)
+	Private Sub Gex_KeyDown(sender As Object, e As DomKeyEventArgs)
 		If e.KeyCode = Keys.Escape Then
 			butMin_Click(sender, Nothing)
 		ElseIf e.CtrlKey AndAlso e.KeyCode = 192 Then
@@ -175,7 +177,7 @@
 					End Try
 
 					If Not IsNothing(urx) Then
-						GeX.Navigate(urx.DnsSafeHost)
+						GeX.Navigate(urx.OriginalString)
 					Else
 						GeX.Navigate("https://www.google.com/search?q=" & Replace(newAdd, " ", "+") & "&oq=" & Replace(newAdd, " ", "+"))
 					End If
@@ -250,10 +252,10 @@
 		End If
 
 		If lbUA.Text = "📱" Then
-			Gecko.GeckoPreferences.User("general.useragent.override") = DesktopUA
+			GeckoPreferences.User("general.useragent.override") = DesktopUA
 			lbUA.Text = "🖳"
 		Else
-			Gecko.GeckoPreferences.User("general.useragent.override") = MobileUA
+			GeckoPreferences.User("general.useragent.override") = MobileUA
 			lbUA.Text = "📱"
 		End If
 
