@@ -8,9 +8,9 @@ Public Class MainX
 
 	Private Async Sub MainX_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		Me.Text = "Untitled - Notepad" '"GexFox v" & My.Application.Info.Version.ToString
-		Me.Icon = My.Resources.note_plus_outline 'materialdesignicons.com
+		Me.Icon = My.Resources.notepad_icon_17525_16x16	'materialdesignicons.com
 
-		notIGexed.Icon = My.Resources.note_plus_outline	'materialdesignicons.com
+		notIGexed.Icon = My.Resources.notepad_icon_17525_16x16	'materialdesignicons.com
 		notIGexed.Text = Me.Text '"GexFox v" & My.Application.Info.Version.ToString
 		pbLoad.Image = My.Resources._126
 

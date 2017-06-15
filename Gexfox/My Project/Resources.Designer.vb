@@ -83,9 +83,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
-        Friend ReadOnly Property note_plus_outline() As System.Drawing.Icon
+        Friend ReadOnly Property notepad_icon_17525_16x16() As System.Drawing.Icon
             Get
-                Dim obj As Object = ResourceManager.GetObject("note_plus_outline", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("notepad_icon_17525_16x16", resourceCulture)
                 Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
