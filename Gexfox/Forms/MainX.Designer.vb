@@ -96,7 +96,8 @@ Partial Class MainX
 		Me.txUrl.Size = New System.Drawing.Size(142, 22)
 		Me.txUrl.TabIndex = 0
 		Me.txUrl.TabStop = False
-		Me.tipper.SetToolTip(Me.txUrl, "(Select All Text and Focus: ctrl+`)")
+		Me.tipper.SetToolTip(Me.txUrl, "(Select All Text and Focus: ctrl+`)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "To search: start with ""?"" then your query (?" & _
+		"how to browse)")
 		'
 		'lbHome
 		'
