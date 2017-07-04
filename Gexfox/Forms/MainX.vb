@@ -155,6 +155,9 @@ Public Class MainX
 #End Region
 
 #Region "Controls"
+	Private Sub LbStatusText_MouseEnter(sender As Object, e As EventArgs) Handles LbStatusText.MouseEnter
+		LbStatusText.Visible = False
+	End Sub
 
 	Private Sub tbOpac_ValueChanged(sender As Object, e As EventArgs) Handles tbOpac.ValueChanged
 		Me.Opacity = tbOpac.Value / 100
