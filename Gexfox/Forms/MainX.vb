@@ -21,7 +21,7 @@ Public Class MainX
 		'set Geck inits
 		GeckoPreferences.User("general.useragent.override") = MobileUA
 		GeckoPreferences.User("zoom.maxPercent") = 100
-		GeckoPreferences.User("zoom.minPercent") = 100
+		GeckoPreferences.User("zoom.minPercent") = 50
 		GeckoPreferences.User("layout.spellcheckDefault") = 2
 		GeckoPreferences.User("ui.SpellCheckerUnderlineStyle") = 4
 		GeckoPreferences.User("network.http.pipelining") = True
@@ -154,6 +154,7 @@ Public Class MainX
 #End Region
 
 #Region "Controls"
+
 	Private Sub LbStatusText_MouseEnter(sender As Object, e As EventArgs) Handles LbStatusText.MouseEnter
 		LbStatusText.Visible = False
 	End Sub
@@ -174,9 +175,10 @@ Public Class MainX
 				Else
 					If newAdd.Trim.StartsWith("?") AndAlso newAdd.Trim.Length > 1 Then
 						newAdd = newAdd.Substring(1).Trim
-						GeX.Navigate("https://www.google.com/search?q=" & Replace(newAdd, " ", "+") & "&oq=" & Replace(newAdd, " ", "+"))
+						GeX.Navigate("https://www.google.com/search?q=" & Replace(newAdd, " ", "+"))
 					Else
 						GeX.Navigate(newAdd.Trim)
+						txUrl.Focus()
 					End If
 				End If
 			End If
@@ -208,7 +210,7 @@ Public Class MainX
 
 	Private Sub lbHome_Click(sender As Object, e As EventArgs) Handles lbHome.Click
 		GeX.Stop()
-		GeX.Navigate("https://shrib.com/")
+		GeX.Navigate("https://google.com/")
 		tbOpac.Value = 100
 	End Sub
 

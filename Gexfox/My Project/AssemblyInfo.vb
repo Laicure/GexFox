@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following
@@ -8,17 +7,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Gexfox")> 
-<Assembly: AssemblyDescription("Gexed!")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("Gexfox")> 
-<Assembly: AssemblyCopyright("Copyright © 2017")> 
-<Assembly: AssemblyTrademark("Laicure Leviare Icarus")> 
+<Assembly: AssemblyTitle("Gexfox")>
+<Assembly: AssemblyDescription("Gexed!")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("Gexfox")>
+<Assembly: AssemblyCopyright("Copyright © 2017")>
+<Assembly: AssemblyTrademark("Laicure Leviare Icarus")>
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("ac112a5f-c435-48aa-a717-b8bcfba54b54")> 
+<Assembly: Guid("ac112a5f-c435-48aa-a717-b8bcfba54b54")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.*")> 
-<Assembly: resources.NeutralResourcesLanguageAttribute("en")> 
+<Assembly: AssemblyVersion("1.0.*")>
+<Assembly: Resources.NeutralResourcesLanguageAttribute("en")>
